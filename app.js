@@ -198,7 +198,7 @@ async function prosesRemoteSDP(parsedData) {
 // TOMBOL: BUAT ROOM CHAT BARU (SISI INITIATOR / OFFER)
 $("btnOffer").onclick = async () => {
   let pid = id();
-  currentRoomId = pid; // Kunci ID untuk room obrolan saat ini
+  currentRoomId = pid; 
 
   let peer = {
     pc: new RTCPeerConnection(cfg),
@@ -214,11 +214,16 @@ $("btnOffer").onclick = async () => {
   let offer = await peer.pc.createOffer();
   await peer.pc.setLocalDescription(offer);
 
+  // --- INDIKATOR BARU ---
+  showToast(`Room ${pid} Berhasil Dibuat!`);
   log(`Room dibuat dengan ID: ${pid}. Menunggu teman bergabung...`);
   
-  // Nyalakan mesin pencari sinyal balik otomatis
+  // Otomatis menutup panel pengaturan setelah room dibuat agar user bisa melihat log chat
+  $("connectionBox").classList.add("hidden"); 
+  
   startPolling();
 };
+
 
 // TOMBOL: BERGABUNG DENGAN ROOM TEMAN SECARA MANUAL (SISI JOINER / ANSWER)
 $("btnAnswer").onclick = async () => {
@@ -275,3 +280,16 @@ if (btnSetting) {
     $("connectionBox").classList.toggle("hidden");
   };
 }
+
+// Fungsi memunculkan notifikasi melayang (Toast) ala Telegram
+function showToast(message) {
+  const toast = $("toast");
+  if (toast) {
+    toast.textContent = message;
+    toast.classList.add("show");
+    setTimeout(() => {
+      toast.classList.remove("show");
+    }, 3000); // Hilang otomatis setelah 3 detik
+  }
+}
+
