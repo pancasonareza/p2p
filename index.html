@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>P2P Chat - Auto Polling</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header>
+    <div class="profile">
+      <div id="peerName">🌐 P2P Chat</div>
+      <small id="status">Belum Konek</small>
+    </div>
+    <!-- Tombol untuk membuka/menutup panel setup signaling -->
+    <button id="btnSetting" title="Pengaturan Koneksi">⚙️</button>
+  </header>
+
+  <div class="layout">
+    <div class="chat">
+      <!-- Area Pesan Masuk dan Keluar -->
+      <div id="chatBox"></div>
+
+      <div class="input">
+        <input id="msgInput" placeholder="Ketik pesan..." autocomplete="off">
+        <button id="btnSend" disabled>➤</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Panel Koneksi Baru (Secara default tersembunyi berkat class 'hidden') -->
+  <div id="connectionBox" class="card hidden">
+    <h3>Koneksi Sinyal P2P</h3>
+    
+    <label for="localSDP">Kode SDP Saya (Otomatis terunggah):</label>
+    <textarea id="localSDP" readonly placeholder="Menunggu pembuatan ruangan..."></textarea>
+    
+    <button id="btnCopy">📋 Copy Kode Saya</button>
+
+    <label for="remoteSDP" style="margin-top: 10px; display: block;">Kode SDP Teman (Manual/Backup):</label>
+    <textarea id="remoteSDP" placeholder="Tempel kode offer/answer dari teman di sini jika auto-polling mati"></textarea>
+
+    <div class="row">
+      <button id="btnOffer">🟢 Buat Room</button>
+      <button id="btnAnswer">🔵 Proses Code</button>
+    </div>
+  </div>
+
+  <!-- Toast Notifikasi Ringan -->
+  <div id="toast">Tersalin</div>
+
+  <!-- Memuat logika aplikasi chat -->
+  <script src="app.js"></script>
+</body>
+</html>
