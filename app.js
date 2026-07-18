@@ -8,7 +8,7 @@ const status = $("status"),
   send = $("btnSend");
 
 const peerName = $("peerName");
-const GAS = "https://google.com";
+const GAS = "https://script.google.com/macros/s/AKfycbzdpwTrqSI9TXMQ0TUNRcnoxy3LylrgzGIC4vmlFXLt-wc3g34jsf6BDHNtqREiCD-J/exec";
 
 const peers = new Map();
 let active = null;
